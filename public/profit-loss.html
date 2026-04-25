@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Profit & Loss</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">MV</div>
+      <div>
+        <h2>MVEXPRESS</h2>
+        <p>Operations Control</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">MAIN</div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard.html" class="nav-item">Dashboard</a>
+      <a href="/staff.html" class="nav-item">Staff Management</a>
+      <a href="/attendance.html" class="nav-item">Attendance</a>
+      <a href="/payroll.html" class="nav-item">Payroll</a>
+      <a href="/payslip.html" class="nav-item">Payslip</a>
+      <a href="/complaints.html" class="nav-item">Complaints</a>
+      <a href="/inventory.html" class="nav-item">Inventory</a>
+      <a href="/expenses.html" class="nav-item">Expenses</a>
+      <a href="/income.html" class="nav-item">Income</a>
+      <a href="/profit-loss.html" class="nav-item active">Profit & Loss</a>
+      <a href="/customers.html" class="nav-item">Customers</a>
+      <a href="/offers-whatsapp.html" class="nav-item">Offers / WhatsApp</a>
+      <a href="/activity-logs.html" class="nav-item">Activity Logs</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="mini-status-card">
+        <span class="mini-status-dot"></span>
+        <div>
+          <strong>Profit & Loss</strong>
+          <p>Track business result month by month.</p>
+        </div>
+      </div>
+
+      <button class="logout-btn sidebar-logout" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="dashboard-header">
+      <div>
+        <p class="page-kicker">MVEXPRESS ADMIN PANEL</p>
+        <h1>Profit & Loss Dashboard</h1>
+        <p class="header-subtitle">
+          Review monthly payroll, expense outflow, and current net business position from one page.
+        </p>
+      </div>
+
+      <div class="header-right">
+        <div class="status-chip">Business Result</div>
+        <button class="logout-btn top-logout" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="executive-banner">
+      <div class="executive-banner-left">
+        <p class="banner-tag">MVEXPRESS / PROFIT CONTROL</p>
+        <h2>Understand real monthly business performance</h2>
+        <p>
+          This page combines expense totals and payroll totals to show your current business outflow.
+          Income is ready to connect in the next upgrade.
+        </p>
+      </div>
+
+      <div class="executive-banner-right">
+        <div class="banner-badge">P & L</div>
+      </div>
+    </section>
+
+    <section class="page-card" style="margin-bottom:20px;">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">MONTH FILTER</p>
+          <h2 style="margin:0;">Load Monthly Result</h2>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:end;">
+          <div>
+            <label for="profitLossMonth">Select Month</label>
+            <input type="month" id="profitLossMonth" />
+          </div>
+          <button type="button" class="action-btn" id="loadProfitLossBtn">Load Result</button>
+        </div>
+      </div>
+
+      <div id="profitLossMessage" class="message" style="text-align:left; min-height:24px;"></div>
+    </section>
+
+    <section class="stats-grid" style="margin-bottom:20px;">
+      <div class="stat-card">
+        <p class="stat-label">Total Income</p>
+        <h3 id="profitLossIncome">₹0.00</h3>
+        <span class="stat-foot">income module next step</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Total Expenses</p>
+        <h3 id="profitLossExpense">₹0.00</h3>
+        <span class="stat-foot">shop expenses only</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Total Payroll</p>
+        <h3 id="profitLossPayroll">₹0.00</h3>
+        <span class="stat-foot">salary outflow</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Total Outflow</p>
+        <h3 id="profitLossOutflow">₹0.00</h3>
+        <span class="stat-foot">expense + payroll</span>
+      </div>
+
+      <div class="stat-card emphasis-card">
+        <p class="stat-label">Net Profit</p>
+        <h3 id="profitLossNet">₹0.00</h3>
+        <span class="stat-foot">income - outflow</span>
+      </div>
+    </section>
+
+    <section class="page-card">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">EXPENSE BREAKDOWN</p>
+          <h2 style="margin:0;">Category-wise Monthly Spending</h2>
+        </div>
+      </div>
+
+      <div class="data-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Total Entries</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody id="profitLossBreakdownBody">
+            <tr>
+              <td colspan="3" style="text-align:center;">No data loaded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const monthInput = document.getElementById("profitLossMonth");
+      const now = new Date();
+      const monthValue = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+      if (monthInput && !monthInput.value) {
+        monthInput.value = monthValue;
+      }
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

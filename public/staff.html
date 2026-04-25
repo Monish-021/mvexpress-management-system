@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Staff Management</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">MV</div>
+      <div>
+        <h2>MVEXPRESS</h2>
+        <p>Operations Control</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">MAIN</div>
+    <nav class="sidebar-nav">
+  <a href="/dashboard.html" class="nav-item">Dashboard</a>
+  <a href="/staff.html" class="nav-item active">Staff Management</a>
+  <a href="/attendance.html" class="nav-item">Attendance</a>
+  <a href="/payroll.html" class="nav-item">Payroll</a>
+  <a href="/payslip.html" class="nav-item">Payslip</a>
+  <a href="/complaints.html" class="nav-item">Complaints</a>
+  <a href="/inventory.html" class="nav-item">Inventory</a>
+  <a href="/expenses.html" class="nav-item">Expenses</a>
+  <a href="/income.html" class="nav-item">Income</a>
+  <a href="/profit-loss.html" class="nav-item">Profit & Loss</a>
+  <a href="/customers.html" class="nav-item">Customers</a>
+  <a href="/offers-whatsapp.html" class="nav-item">Offers / WhatsApp</a>
+  <a href="/activity-logs.html" class="nav-item">Activity Logs</a>
+</nav>
+
+    <div class="sidebar-bottom">
+      <div class="mini-status-card">
+        <span class="mini-status-dot"></span>
+        <div>
+          <strong>Staff Module Ready</strong>
+          <p>Add, search, edit, and manage your team here.</p>
+        </div>
+      </div>
+
+      <button class="logout-btn sidebar-logout" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="dashboard-header">
+      <div>
+        <p class="page-kicker">MVEXPRESS ADMIN PANEL</p>
+        <h1>Staff Management</h1>
+        <p class="header-subtitle">
+          Add staff details, store mobile, WhatsApp, GPay, hourly rate, role, joining date and status.
+        </p>
+      </div>
+
+      <div class="header-right">
+        <div class="status-chip">Staff Records</div>
+        <button class="logout-btn top-logout" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="executive-banner">
+      <div class="executive-banner-left">
+        <p class="banner-tag">MVEXPRESS / STAFF CONTROL</p>
+        <h2>Manage your staff in one professional page</h2>
+        <p>
+          This page will help you create staff profiles first. After this, we will connect attendance,
+          automatic IN/OUT timing, hourly pay calculation, and payroll based on the 10th salary cycle.
+        </p>
+      </div>
+
+      <div class="executive-banner-right">
+        <div class="banner-badge">STAFF MODULE</div>
+      </div>
+    </section>
+
+    <section class="page-card" style="margin-bottom: 20px;">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">ADD NEW STAFF</p>
+          <h2 style="margin: 0;">Staff Entry Form</h2>
+        </div>
+      </div>
+
+      <form id="staffForm" class="form-grid">
+        <div>
+          <label for="staffName">Staff Name</label>
+          <input type="text" id="staffName" placeholder="Enter staff name" required />
+        </div>
+
+        <div>
+          <label for="staffMobile">Mobile Number</label>
+          <input type="text" id="staffMobile" placeholder="Enter mobile number" required />
+        </div>
+
+        <div>
+          <label for="staffWhatsapp">WhatsApp Number</label>
+          <input type="text" id="staffWhatsapp" placeholder="Enter WhatsApp number" />
+        </div>
+
+        <div>
+          <label for="staffGpay">GPay Number</label>
+          <input type="text" id="staffGpay" placeholder="Enter GPay number" />
+        </div>
+
+        <div>
+          <label for="staffRole">Role</label>
+          <input type="text" id="staffRole" placeholder="Example: Part Time Staff / Helper / Admin" />
+        </div>
+
+        <div>
+          <label for="staffHourlyRate">Hourly Rate</label>
+          <input type="number" id="staffHourlyRate" placeholder="Enter hourly rate" value="50" min="0" step="0.01" />
+        </div>
+
+        <div>
+          <label for="staffJoiningDate">Joining Date</label>
+          <input type="date" id="staffJoiningDate" />
+        </div>
+
+        <div>
+          <label for="staffStatus">Status</label>
+          <select id="staffStatus">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div class="full-span">
+          <label for="staffNotes">Notes</label>
+          <textarea id="staffNotes" rows="4" placeholder="Add any notes about this staff member"></textarea>
+        </div>
+
+        <div class="full-span" style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button type="submit" class="action-btn" id="saveStaffBtn">Save Staff</button>
+          <button type="button" class="secondary-btn" id="resetStaffBtn">Reset Form</button>
+        </div>
+
+        <div class="full-span">
+          <p id="staffFormMessage" class="message" style="text-align: left;"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="page-card">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">STAFF LIST</p>
+          <h2 style="margin: 0;">Manage Existing Staff</h2>
+        </div>
+      </div>
+
+      <div class="search-filter-row" style="margin-bottom: 18px;">
+        <div class="search-box">
+          <label for="staffSearch">Search Staff</label>
+          <input
+            type="text"
+            id="staffSearch"
+            placeholder="Search by name, mobile, WhatsApp, GPay, role"
+          />
+        </div>
+
+        <div class="filter-box">
+          <label for="staffFilterStatus">Filter by Status</label>
+          <select id="staffFilterStatus">
+            <option value="All">All</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div style="display: flex; align-items: end; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="action-btn" id="searchStaffBtn">Search</button>
+          <button type="button" class="secondary-btn" id="refreshStaffBtn">Refresh</button>
+        </div>
+      </div>
+
+      <div class="data-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>WhatsApp</th>
+              <th>GPay</th>
+              <th>Role</th>
+              <th>Hourly Rate</th>
+              <th>Joining Date</th>
+              <th>Status</th>
+              <th>Notes</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="staffTableBody">
+            <tr>
+              <td colspan="12" style="text-align: center;">No staff data loaded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

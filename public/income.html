@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Income</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">MV</div>
+      <div>
+        <h2>MVEXPRESS</h2>
+        <p>Operations Control</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">MAIN</div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard.html" class="nav-item">Dashboard</a>
+      <a href="/staff.html" class="nav-item">Staff Management</a>
+      <a href="/attendance.html" class="nav-item">Attendance</a>
+      <a href="/payroll.html" class="nav-item">Payroll</a>
+      <a href="/payslip.html" class="nav-item">Payslip</a>
+      <a href="/complaints.html" class="nav-item">Complaints</a>
+      <a href="/inventory.html" class="nav-item">Inventory</a>
+      <a href="/expenses.html" class="nav-item">Expenses</a>
+      <a href="/income.html" class="nav-item active">Income</a>
+      <a href="/profit-loss.html" class="nav-item">Profit & Loss</a>
+      <a href="/customers.html" class="nav-item">Customers</a>
+      <a href="/offers-whatsapp.html" class="nav-item">Offers / WhatsApp</a>
+      <a href="/activity-logs.html" class="nav-item">Activity Logs</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="mini-status-card">
+        <span class="mini-status-dot"></span>
+        <div>
+          <strong>Income Module</strong>
+          <p>Track daily earnings and service revenue.</p>
+        </div>
+      </div>
+
+      <button class="logout-btn sidebar-logout" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="dashboard-header">
+      <div>
+        <p class="page-kicker">MVEXPRESS ADMIN PANEL</p>
+        <h1>Income Management</h1>
+        <p class="header-subtitle">
+          Record courier, printing, lamination, and other service income to see real business profit.
+        </p>
+      </div>
+
+      <div class="header-right">
+        <div class="status-chip">Income Control</div>
+        <button class="logout-btn top-logout" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="executive-banner">
+      <div class="executive-banner-left">
+        <p class="banner-tag">MVEXPRESS / INCOME CONTROL</p>
+        <h2>Track service-wise daily income clearly</h2>
+        <p>
+          Save every amount you receive from courier booking, printing, lamination,
+          project work, and other services to understand real monthly business income.
+        </p>
+      </div>
+
+      <div class="executive-banner-right">
+        <div class="banner-badge">INCOME</div>
+      </div>
+    </section>
+
+    <section class="page-card" style="margin-bottom:20px;">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">ADD / EDIT INCOME</p>
+          <h2 style="margin:0;">Income Entry Form</h2>
+        </div>
+      </div>
+
+      <form id="incomeForm" class="form-grid">
+        <div>
+          <label for="incomeDate">Income Date</label>
+          <input type="date" id="incomeDate" />
+        </div>
+
+        <div>
+          <label for="incomeCategory">Category</label>
+          <select id="incomeCategory">
+            <option value="Courier">Courier</option>
+            <option value="Printing">Printing</option>
+            <option value="Lamination">Lamination</option>
+            <option value="Project Work">Project Work</option>
+            <option value="Documentation Help">Documentation Help</option>
+            <option value="Design Service">Design Service</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="incomeName">Income Name</label>
+          <input type="text" id="incomeName" placeholder="Example: DTDC courier booking" />
+        </div>
+
+        <div>
+          <label for="incomeAmount">Amount</label>
+          <input type="number" id="incomeAmount" min="0" step="0.01" placeholder="0" />
+        </div>
+
+        <div>
+          <label for="incomePaymentMode">Payment Mode</label>
+          <select id="incomePaymentMode">
+            <option value="Cash">Cash</option>
+            <option value="UPI">UPI</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+            <option value="Card">Card</option>
+          </select>
+        </div>
+
+        <div>
+  <label for="incomeCustomerSelect">Select Existing Customer</label>
+  <select id="incomeCustomerSelect">
+    <option value="">Choose customer</option>
+  </select>
+</div>
+
+<div>
+  <label for="incomeCustomerName">Customer Name</label>
+  <input type="text" id="incomeCustomerName" placeholder="Customer / party name" />
+</div>
+
+        <div class="full-span">
+          <label for="incomeNotes">Notes</label>
+          <textarea id="incomeNotes" rows="4" placeholder="Extra notes about this income"></textarea>
+        </div>
+
+        <div class="full-span" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button type="submit" class="action-btn" id="saveIncomeBtn">Save Income</button>
+          <button type="button" class="secondary-btn" id="resetIncomeBtn">Reset Form</button>
+        </div>
+
+        <div class="full-span">
+          <p id="incomeFormMessage" class="message" style="text-align:left; min-height:24px;"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="page-card">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">INCOME HISTORY</p>
+          <h2 style="margin:0;">Search and Manage Income</h2>
+        </div>
+      </div>
+
+      <div class="search-filter-row" style="margin-bottom:18px;">
+        <div class="search-box">
+          <label for="incomeSearch">Search</label>
+          <input
+            type="text"
+            id="incomeSearch"
+            placeholder="Search by income name, category, customer, notes"
+          />
+        </div>
+
+        <div class="filter-box">
+          <label for="incomeCategoryFilter">Category</label>
+          <select id="incomeCategoryFilter">
+            <option value="All">All</option>
+            <option value="Courier">Courier</option>
+            <option value="Printing">Printing</option>
+            <option value="Lamination">Lamination</option>
+            <option value="Project Work">Project Work</option>
+            <option value="Documentation Help">Documentation Help</option>
+            <option value="Design Service">Design Service</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+
+        <div class="filter-box">
+          <label for="incomeStartDate">From</label>
+          <input type="date" id="incomeStartDate" />
+        </div>
+
+        <div class="filter-box">
+          <label for="incomeEndDate">To</label>
+          <input type="date" id="incomeEndDate" />
+        </div>
+
+        <div style="display:flex; align-items:end; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="action-btn" id="searchIncomeBtn">Search</button>
+          <button type="button" class="secondary-btn" id="refreshIncomeBtn">Refresh</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <strong>Total Filtered Income: </strong>
+        <span id="incomeTotalAmount">₹0.00</span>
+      </div>
+
+      <div class="data-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Category</th>
+              <th>Income Name</th>
+              <th>Amount</th>
+              <th>Payment Mode</th>
+              <th>Customer</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="incomeTableBody">
+            <tr>
+              <td colspan="9" style="text-align:center;">No income loaded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dateInput = document.getElementById("incomeDate");
+      const now = new Date();
+      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+      if (dateInput && !dateInput.value) {
+        dateInput.value = today;
+      }
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

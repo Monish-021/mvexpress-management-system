@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Payroll</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">MV</div>
+      <div>
+        <h2>MVEXPRESS</h2>
+        <p>Operations Control</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">MAIN</div>
+    <nav class="sidebar-nav">
+  <a href="/dashboard.html" class="nav-item">Dashboard</a>
+  <a href="/staff.html" class="nav-item">Staff Management</a>
+  <a href="/attendance.html" class="nav-item">Attendance</a>
+  <a href="/payroll.html" class="nav-item active">Payroll</a>
+  <a href="/payslip.html" class="nav-item">Payslip</a>
+  <a href="/complaints.html" class="nav-item">Complaints</a>
+  <a href="/inventory.html" class="nav-item">Inventory</a>
+  <a href="/expenses.html" class="nav-item">Expenses</a>
+  <a href="/income.html" class="nav-item">Income</a>
+  <a href="/profit-loss.html" class="nav-item">Profit & Loss</a>
+  <a href="/customers.html" class="nav-item">Customers</a>
+  <a href="/offers-whatsapp.html" class="nav-item">Offers / WhatsApp</a>
+  <a href="/activity-logs.html" class="nav-item">Activity Logs</a>
+</nav>
+
+    <div class="sidebar-bottom">
+      <div class="mini-status-card">
+        <span class="mini-status-dot"></span>
+        <div>
+          <strong>Payroll Module</strong>
+          <p>Monthly salary calculation based on attendance and hourly rate.</p>
+        </div>
+      </div>
+
+      <button class="logout-btn sidebar-logout" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="dashboard-header">
+      <div>
+        <p class="page-kicker">MVEXPRESS ADMIN PANEL</p>
+        <h1>Payroll Management</h1>
+        <p class="header-subtitle">
+          Calculate monthly salary from worked hours, add bonus or deduction, and see final payable amount.
+        </p>
+      </div>
+
+      <div class="header-right">
+        <div class="status-chip">10th Salary Cycle</div>
+        <button class="logout-btn top-logout" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="executive-banner">
+      <div class="executive-banner-left">
+        <p class="banner-tag">MVEXPRESS / PAYROLL CONTROL</p>
+        <h2>Attendance-based salary calculation for your staff</h2>
+        <p>
+          This page will calculate salary from staff hourly rate and monthly worked hours.
+          Bonus and deduction can be adjusted before finalizing the payable amount.
+        </p>
+      </div>
+
+      <div class="executive-banner-right">
+        <div class="banner-badge">PAYROLL</div>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <p class="stat-label">Selected Month</p>
+        <h3 id="payrollSelectedMonth">-</h3>
+        <span class="stat-foot">payroll month</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Staff Count</p>
+        <h3 id="payrollStaffCount">0</h3>
+        <span class="stat-foot">included in payroll</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Total Hours</p>
+        <h3 id="payrollTotalHours">0h</h3>
+        <span class="stat-foot">combined worked time</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Base Salary</p>
+        <h3 id="payrollBaseSalary">₹0</h3>
+        <span class="stat-foot">before adjustments</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Total Bonus</p>
+        <h3 id="payrollTotalBonus">₹0</h3>
+        <span class="stat-foot">manual additions</span>
+      </div>
+
+      <div class="stat-card emphasis-card">
+        <p class="stat-label">Final Payable</p>
+        <h3 id="payrollFinalPayable">₹0</h3>
+        <span class="stat-foot">after bonus & deduction</span>
+      </div>
+    </section>
+
+    <section class="page-card" style="margin-bottom: 20px;">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">PAYROLL FILTER</p>
+          <h2 style="margin: 0;">Select Month and Load Payroll</h2>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:end;">
+          <div>
+            <label for="payrollMonth">Month</label>
+            <input type="month" id="payrollMonth" />
+          </div>
+          <button type="button" class="action-btn" id="loadPayrollBtn">Load Payroll</button>
+        </div>
+      </div>
+
+      <div id="payrollMessage" class="message" style="text-align:left; min-height:24px;"></div>
+    </section>
+
+    <section class="page-card">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">PAYROLL TABLE</p>
+          <h2 style="margin: 0;">Monthly Staff Salary Calculation</h2>
+        </div>
+      </div>
+
+      <div class="data-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Staff ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Hourly Rate</th>
+              <th>Total Worked Time</th>
+              <th>Base Salary</th>
+              <th>Bonus</th>
+              <th>Deduction</th>
+              <th>Final Salary</th>
+            </tr>
+          </thead>
+          <tbody id="payrollTableBody">
+            <tr>
+              <td colspan="9" style="text-align:center;">No payroll loaded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

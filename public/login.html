@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="login-body">
+  <div class="login-shell">
+    <div class="login-left">
+      <div class="brand-badge">MVEXPRESS</div>
+      <h1>Prints & Couriers Management System</h1>
+      <p class="hero-text">
+        Professional control panel for courier booking, slip making,
+        staff attendance, complaints, inventory, reports, and shop operations.
+      </p>
+
+      <div class="feature-pills">
+        <span>Courier Booking</span>
+        <span>Slip Maker</span>
+        <span>Staff & Attendance</span>
+        <span>Complaints</span>
+        <span>Inventory</span>
+        <span>Profit Reports</span>
+      </div>
+    </div>
+
+    <div class="login-right">
+      <div class="login-card pro-card">
+        <div class="card-top-line"></div>
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Login to continue to MVEXPRESS dashboard</p>
+
+        <form id="loginForm" novalidate>
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter username" required />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter password" required />
+          </div>
+
+          <button type="submit" class="primary-btn">Login to Dashboard</button>
+          <p id="message" class="message"></p>
+        </form>
+
+        <div class="login-footer-note">
+          <span>System: MVEXPRESS021</span>
+          <span>Port: 5100</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

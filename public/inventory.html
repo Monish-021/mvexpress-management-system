@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Inventory</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">MV</div>
+      <div>
+        <h2>MVEXPRESS</h2>
+        <p>Operations Control</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">MAIN</div>
+   <nav class="sidebar-nav">
+  <a href="/dashboard.html" class="nav-item">Dashboard</a>
+  <a href="/staff.html" class="nav-item">Staff Management</a>
+  <a href="/attendance.html" class="nav-item">Attendance</a>
+  <a href="/payroll.html" class="nav-item">Payroll</a>
+  <a href="/payslip.html" class="nav-item">Payslip</a>
+  <a href="/complaints.html" class="nav-item">Complaints</a>
+  <a href="/inventory.html" class="nav-item active">Inventory</a>
+  <a href="/expenses.html" class="nav-item">Expenses</a>
+  <a href="/income.html" class="nav-item">Income</a>
+  <a href="/profit-loss.html" class="nav-item">Profit & Loss</a>
+  <a href="/customers.html" class="nav-item">Customers</a>
+  <a href="/offers-whatsapp.html" class="nav-item">Offers / WhatsApp</a>
+  <a href="/activity-logs.html" class="nav-item">Activity Logs</a>
+</nav>
+
+    <div class="sidebar-bottom">
+      <div class="mini-status-card">
+        <span class="mini-status-dot"></span>
+        <div>
+          <strong>Inventory Module</strong>
+          <p>Track shop stock and low stock alerts.</p>
+        </div>
+      </div>
+
+      <button class="logout-btn sidebar-logout" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="dashboard-header">
+      <div>
+        <p class="page-kicker">MVEXPRESS ADMIN PANEL</p>
+        <h1>Inventory Management</h1>
+        <p class="header-subtitle">
+          Track paper, ink, tape, pouches, courier covers, lamination sheets, printer items, and low stock alerts.
+        </p>
+      </div>
+
+      <div class="header-right">
+        <div class="status-chip">Stock Control</div>
+        <button class="logout-btn top-logout" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="executive-banner">
+      <div class="executive-banner-left">
+        <p class="banner-tag">MVEXPRESS / INVENTORY CONTROL</p>
+        <h2>Professional stock tracking for your shop</h2>
+        <p>
+          Add stock items, maintain current quantity, define minimum stock level,
+          and identify low stock items before they run out.
+        </p>
+      </div>
+
+      <div class="executive-banner-right">
+        <div class="banner-badge">INVENTORY</div>
+      </div>
+    </section>
+
+    <section class="page-card" style="margin-bottom:20px;">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">ADD / EDIT STOCK</p>
+          <h2 style="margin:0;">Inventory Item Form</h2>
+        </div>
+      </div>
+
+      <form id="inventoryForm" class="form-grid">
+        <div>
+          <label for="inventoryItemName">Item Name</label>
+          <input type="text" id="inventoryItemName" placeholder="Example: A4 Paper" />
+        </div>
+
+        <div>
+          <label for="inventoryCategory">Category</label>
+          <input type="text" id="inventoryCategory" placeholder="Example: Paper / Ink / Tape" />
+        </div>
+
+        <div>
+          <label for="inventoryUnit">Unit</label>
+          <input type="text" id="inventoryUnit" placeholder="pcs / pack / box / roll" value="pcs" />
+        </div>
+
+        <div>
+          <label for="inventorySupplierName">Supplier Name</label>
+          <input type="text" id="inventorySupplierName" placeholder="Supplier name" />
+        </div>
+
+        <div>
+          <label for="inventoryPurchasePrice">Purchase Price</label>
+          <input type="number" id="inventoryPurchasePrice" min="0" step="0.01" placeholder="0" />
+        </div>
+
+        <div>
+          <label for="inventorySellingPrice">Selling Price</label>
+          <input type="number" id="inventorySellingPrice" min="0" step="0.01" placeholder="0" />
+        </div>
+
+        <div>
+          <label for="inventoryCurrentStock">Current Stock</label>
+          <input type="number" id="inventoryCurrentStock" min="0" step="1" placeholder="0" />
+        </div>
+
+        <div>
+          <label for="inventoryMinimumStock">Minimum Stock Alert Level</label>
+          <input type="number" id="inventoryMinimumStock" min="0" step="1" placeholder="0" />
+        </div>
+
+        <div class="full-span">
+          <label for="inventoryNotes">Notes</label>
+          <textarea id="inventoryNotes" rows="4" placeholder="Extra notes about this stock item"></textarea>
+        </div>
+
+        <div class="full-span" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button type="submit" class="action-btn" id="saveInventoryBtn">Save Inventory</button>
+          <button type="button" class="secondary-btn" id="resetInventoryBtn">Reset Form</button>
+        </div>
+
+        <div class="full-span">
+          <p id="inventoryFormMessage" class="message" style="text-align:left; min-height:24px;"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="page-card">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">STOCK LIST</p>
+          <h2 style="margin:0;">Search and Manage Inventory</h2>
+        </div>
+      </div>
+
+      <div class="search-filter-row" style="margin-bottom:18px;">
+        <div class="search-box">
+          <label for="inventorySearch">Search</label>
+          <input
+            type="text"
+            id="inventorySearch"
+            placeholder="Search by item name, category, supplier, unit"
+          />
+        </div>
+
+        <div class="filter-box">
+          <label for="inventoryStatusFilter">Stock Status</label>
+          <select id="inventoryStatusFilter">
+            <option value="All">All</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Low Stock">Low Stock</option>
+          </select>
+        </div>
+
+        <div style="display:flex; align-items:end; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="action-btn" id="searchInventoryBtn">Search</button>
+          <button type="button" class="secondary-btn" id="refreshInventoryBtn">Refresh</button>
+        </div>
+      </div>
+
+      <div class="data-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Item Name</th>
+              <th>Category</th>
+              <th>Unit</th>
+              <th>Supplier</th>
+              <th>Purchase Price</th>
+              <th>Selling Price</th>
+              <th>Current Stock</th>
+              <th>Minimum Stock</th>
+              <th>Status</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="inventoryTableBody">
+            <tr>
+              <td colspan="12" style="text-align:center;">No inventory loaded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

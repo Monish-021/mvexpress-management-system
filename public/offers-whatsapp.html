@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Offers / WhatsApp</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">MV</div>
+      <div>
+        <h2>MVEXPRESS</h2>
+        <p>Operations Control</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">MAIN</div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard.html" class="nav-item">Dashboard</a>
+      <a href="/staff.html" class="nav-item">Staff Management</a>
+      <a href="/attendance.html" class="nav-item">Attendance</a>
+      <a href="/payroll.html" class="nav-item">Payroll</a>
+      <a href="/payslip.html" class="nav-item">Payslip</a>
+      <a href="/complaints.html" class="nav-item">Complaints</a>
+      <a href="/inventory.html" class="nav-item">Inventory</a>
+      <a href="/expenses.html" class="nav-item">Expenses</a>
+      <a href="/income.html" class="nav-item">Income</a>
+      <a href="/profit-loss.html" class="nav-item">Profit & Loss</a>
+      <a href="/offers-whatsapp.html" class="nav-item active">Offers / WhatsApp</a>
+      <a href="/activity-logs.html" class="nav-item">Activity Logs</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="mini-status-card">
+        <span class="mini-status-dot"></span>
+        <div>
+          <strong>Offers / WhatsApp</strong>
+          <p>Create promo messages for customers quickly.</p>
+        </div>
+      </div>
+
+      <button class="logout-btn sidebar-logout" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="dashboard-header">
+      <div>
+        <p class="page-kicker">MVEXPRESS ADMIN PANEL</p>
+        <h1>Offers / WhatsApp</h1>
+        <p class="header-subtitle">
+          Create customer offers, save promo text, and open WhatsApp-ready messages quickly.
+        </p>
+      </div>
+
+      <div class="header-right">
+        <div class="status-chip">Customer Offers</div>
+        <button class="logout-btn top-logout" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="executive-banner">
+      <div class="executive-banner-left">
+        <p class="banner-tag">MVEXPRESS / PROMOTION CONTROL</p>
+        <h2>Create offers and WhatsApp-ready customer messages</h2>
+        <p>
+          Save offer details with title, message, phone number, and customer name.
+          Open a ready-to-send WhatsApp link directly from the saved offer.
+        </p>
+      </div>
+
+      <div class="executive-banner-right">
+        <div class="banner-badge">OFFERS</div>
+      </div>
+    </section>
+
+    <section class="page-card" style="margin-bottom:20px;">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">ADD / EDIT OFFER</p>
+          <h2 style="margin:0;">Offer Form</h2>
+        </div>
+      </div>
+
+      <form id="offerForm" class="form-grid">
+        <div>
+  <label for="offerCustomerSelect">Select Existing Customer</label>
+  <select id="offerCustomerSelect">
+    <option value="">Choose customer</option>
+  </select>
+</div>
+
+<div>
+  <label for="offerCustomerName">Customer Name</label>
+  <input type="text" id="offerCustomerName" placeholder="Customer name" />
+</div>
+
+<div>
+  <label for="offerMobileNumber">Mobile / WhatsApp Number</label>
+  <input type="text" id="offerMobileNumber" placeholder="Example: 9342495437" />
+</div>
+
+        <div>
+          <label for="offerType">Offer Type</label>
+          <select id="offerType">
+            <option value="General">General</option>
+            <option value="Festival">Festival</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Repeat Customer">Repeat Customer</option>
+            <option value="Courier Offer">Courier Offer</option>
+            <option value="Printing Offer">Printing Offer</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="offerTitle">Offer Title</label>
+          <input type="text" id="offerTitle" placeholder="Example: Special Courier Discount" />
+        </div>
+
+        <div class="full-span">
+          <label for="offerMessage">Offer Message</label>
+          <textarea id="offerMessage" rows="5" placeholder="Type the full promotional message here"></textarea>
+        </div>
+
+        <div class="full-span" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button type="submit" class="action-btn" id="saveOfferBtn">Save Offer</button>
+          <button type="button" class="secondary-btn" id="resetOfferBtn">Reset Form</button>
+        </div>
+
+        <div class="full-span">
+          <p id="offerFormMessage" class="message" style="text-align:left; min-height:24px;"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="page-card">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">OFFER HISTORY</p>
+          <h2 style="margin:0;">Search and Manage Offers</h2>
+        </div>
+      </div>
+
+      <div class="search-filter-row" style="margin-bottom:18px;">
+        <div class="search-box">
+          <label for="offerSearch">Search</label>
+          <input type="text" id="offerSearch" placeholder="Search by name, mobile, title, message" />
+        </div>
+
+        <div class="filter-box">
+          <label for="offerTypeFilter">Offer Type</label>
+          <select id="offerTypeFilter">
+            <option value="All">All</option>
+            <option value="General">General</option>
+            <option value="Festival">Festival</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Repeat Customer">Repeat Customer</option>
+            <option value="Courier Offer">Courier Offer</option>
+            <option value="Printing Offer">Printing Offer</option>
+          </select>
+        </div>
+
+        <div style="display:flex; align-items:end; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="action-btn" id="searchOffersBtn">Search</button>
+          <button type="button" class="secondary-btn" id="refreshOffersBtn">Refresh</button>
+        </div>
+      </div>
+
+      <div class="data-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer</th>
+              <th>Mobile</th>
+              <th>Offer Type</th>
+              <th>Offer Title</th>
+              <th>Offer Message</th>
+              <th>WhatsApp</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="offersTableBody">
+            <tr>
+              <td colspan="8" style="text-align:center;">No offers loaded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

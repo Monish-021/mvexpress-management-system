@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Complaints</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body complaints-page">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">MV</div>
+      <div>
+        <h2>MVEXPRESS</h2>
+        <p>Operations Control</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">MAIN</div>
+    <nav class="sidebar-nav">
+  <a href="/dashboard.html" class="nav-item">Dashboard</a>
+  <a href="/staff.html" class="nav-item">Staff Management</a>
+  <a href="/attendance.html" class="nav-item">Attendance</a>
+  <a href="/payroll.html" class="nav-item">Payroll</a>
+  <a href="/payslip.html" class="nav-item">Payslip</a>
+  <a href="/complaints.html" class="nav-item active">Complaints</a>
+  <a href="/inventory.html" class="nav-item">Inventory</a>
+  <a href="/expenses.html" class="nav-item">Expenses</a>
+  <a href="/income.html" class="nav-item">Income</a>
+  <a href="/profit-loss.html" class="nav-item">Profit & Loss</a>
+  <a href="/customers.html" class="nav-item">Customers</a>
+  <a href="/offers-whatsapp.html" class="nav-item">Offers / WhatsApp</a>
+  <a href="/activity-logs.html" class="nav-item">Activity Logs</a>
+</nav>
+
+    <div class="sidebar-bottom">
+      <div class="mini-status-card">
+        <span class="mini-status-dot"></span>
+        <div>
+          <strong>Complaints Module</strong>
+          <p>Track customer shipment issues clearly.</p>
+        </div>
+      </div>
+
+      <button class="logout-btn sidebar-logout" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="dashboard-header">
+      <div>
+        <p class="page-kicker">MVEXPRESS ADMIN PANEL</p>
+        <h1>Complaint Management</h1>
+        <p class="header-subtitle">
+          Receive customer complaints, search by POD or reference, and update issue status with admin notes.
+        </p>
+      </div>
+
+      <div class="header-right">
+  <div class="status-chip">Customer Support</div>
+
+  <div id="newComplaintAlertBadge" class="new-alert-badge" style="display:none;">
+    New Complaint
+  </div>
+
+  <button class="logout-btn top-logout" onclick="logout()">Logout</button>
+</div>
+
+    <section class="executive-banner">
+      <div class="executive-banner-left">
+        <p class="banner-tag">MVEXPRESS / CUSTOMER SUPPORT</p>
+        <h2>Track complaint issues faster</h2>
+        <p>
+          This page helps your shop collect shipment complaints with POD number,
+          reference number, sender and receiver details, and solve them faster with status updates.
+        </p>
+      </div>
+
+      <div class="executive-banner-right">
+        <div class="banner-badge">COMPLAINTS</div>
+      </div>
+    </section>
+
+    <section class="page-card" style="margin-bottom:20px;">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">CUSTOMER COMPLAINT FORM</p>
+          <h2 style="margin:0;">Submit New Complaint</h2>
+        </div>
+      </div>
+
+      <form id="complaintForm" class="form-grid">
+        <div>
+          <label for="complaintType">Complaint Type</label>
+          <select id="complaintType">
+            <option value="Delay">Delay</option>
+            <option value="Not Delivered">Not Delivered</option>
+            <option value="Damage">Damage</option>
+            <option value="Wrong Address">Wrong Address</option>
+            <option value="Lost Parcel">Lost Parcel</option>
+            <option value="Payment Issue">Payment Issue</option>
+            <option value="General Issue">General Issue</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="complaintCourier">Courier Name</label>
+          <input type="text" id="complaintCourier" placeholder="Courier name" />
+        </div>
+
+        <div>
+          <label for="complaintPod">POD Number</label>
+          <input type="text" id="complaintPod" placeholder="Enter POD number" />
+        </div>
+
+        <div>
+          <label for="complaintReference">Reference Number</label>
+          <input type="text" id="complaintReference" placeholder="Enter reference number" />
+        </div>
+
+        <div>
+          <label for="complaintSenderName">Sender Name</label>
+          <input type="text" id="complaintSenderName" placeholder="Sender name" />
+        </div>
+
+        <div>
+          <label for="complaintSenderPhone">Sender Phone</label>
+          <input type="text" id="complaintSenderPhone" placeholder="Sender phone number" />
+        </div>
+
+        <div>
+          <label for="complaintReceiverName">Receiver Name</label>
+          <input type="text" id="complaintReceiverName" placeholder="Receiver name" />
+        </div>
+
+        <div>
+          <label for="complaintReceiverPhone">Receiver Phone</label>
+          <input type="text" id="complaintReceiverPhone" placeholder="Receiver phone number" />
+        </div>
+
+        <div class="full-span">
+          <label for="complaintMessageInput">Complaint Message</label>
+          <textarea id="complaintMessageInput" rows="5" placeholder="Describe the customer issue clearly"></textarea>
+        </div>
+
+        <div class="full-span" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button type="submit" class="action-btn" id="submitComplaintBtn">Submit Complaint</button>
+          <button type="button" class="secondary-btn" id="resetComplaintBtn">Reset Form</button>
+        </div>
+
+        <div class="full-span">
+          <p id="complaintFormMessage" class="message" style="text-align:left; min-height:24px;"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="page-card" style="margin-bottom:20px;">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">ADMIN SEARCH</p>
+          <h2 style="margin:0;">Search and Filter Complaints</h2>
+        </div>
+      </div>
+
+      <div class="search-filter-row" style="margin-bottom:18px;">
+        <div class="search-box">
+          <label for="complaintSearch">Search</label>
+          <input
+            type="text"
+            id="complaintSearch"
+            placeholder="Search by complaint ID, POD, reference, phone, courier, name"
+          />
+        </div>
+
+        <div class="filter-box">
+          <label for="complaintStatusFilter">Status</label>
+          <select id="complaintStatusFilter">
+            <option value="All">All</option>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <div style="display:flex; align-items:end; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="action-btn" id="searchComplaintsBtn">Search</button>
+          <button type="button" class="secondary-btn" id="refreshComplaintsBtn">Refresh</button>
+          <button type="button" class="action-btn" id="exportComplaintsBtn">
+           Export Excel
+          </button>
+          <button type="button" class="secondary-btn" id="exportComplaintsPdfBtn">
+          Export PDF
+          </button>
+        </div>
+
+      <div id="complaintsAdminMessage" class="message" style="text-align:left; min-height:24px;"></div>
+
+      <div id="complaintsCardsGrid" class="complaints-card-grid">
+  <p style="text-align:center;">No complaints loaded yet.</p>
+</div>
+    </section>
+
+    <section class="page-card">
+      <div class="toolbar-row">
+        <div>
+          <p class="section-kicker">ADMIN UPDATE PANEL</p>
+          <h2 style="margin:0;">Update Complaint Status</h2>
+        </div>
+      </div>
+
+      <form id="complaintUpdateForm" class="form-grid">
+        <div>
+          <label for="selectedComplaintId">Complaint ID</label>
+          <input type="text" id="selectedComplaintId" placeholder="Select from table" readonly />
+          <input type="hidden" id="selectedComplaintSenderPhone" />
+        </div>
+
+        <div>
+          <label for="updateComplaintStatus">Update Status</label>
+          <select id="updateComplaintStatus">
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <div class="full-span">
+          <label for="updateComplaintAdminNote">Admin Resolution Note</label>
+          <textarea id="updateComplaintAdminNote" rows="5" placeholder="Write admin note or solution update"></textarea>
+        </div>
+
+        <div class="full-span" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button type="submit" class="action-btn" id="saveComplaintUpdateBtn">Save Update</button>
+          <button type="button" class="secondary-btn" id="resetComplaintUpdateBtn">Reset Update Panel</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

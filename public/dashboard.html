@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVEXPRESS Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">MV</div>
+      <div>
+        <h2>MVEXPRESS</h2>
+        <p>Operations Control</p>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">MAIN</div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard.html" class="nav-item active">Dashboard</a>
+      <a href="/staff.html" class="nav-item">Staff Management</a>
+      <a href="/attendance.html" class="nav-item">Attendance</a>
+      <a href="/payroll.html" class="nav-item">Payroll</a>
+      <a href="/payslip.html" class="nav-item">Payslip</a>
+      <a href="/complaints.html" class="nav-item">Complaints</a>
+      <a href="/inventory.html" class="nav-item">Inventory</a>
+      <a href="/expenses.html" class="nav-item">Expenses</a>
+      <a href="/income.html" class="nav-item">Income</a>
+      <a href="/profit-loss.html" class="nav-item">Profit & Loss</a>
+      <a href="/customers.html" class="nav-item">Customers</a>
+      <a href="/offers-whatsapp.html" class="nav-item">Offers / WhatsApp</a>
+      <a href="/activity-logs.html" class="nav-item">Activity Logs</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="mini-status-card">
+        <span class="mini-status-dot"></span>
+        <div>
+          <strong>System Ready</strong>
+          <p>Single-system local setup</p>
+        </div>
+      </div>
+
+      <button class="logout-btn sidebar-logout" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="dashboard-header">
+      <div>
+        <p class="page-kicker">MVEXPRESS ADMIN PANEL</p>
+        <h1>Business Operations Dashboard</h1>
+        <p class="header-subtitle">
+          Staff control, attendance, complaints, inventory, expenses, payroll and profit tracking in one place.
+        </p>
+      </div>
+
+      <div class="header-right">
+        <div class="status-chip">System Online</div>
+        <button class="logout-btn top-logout" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="executive-banner">
+      <div class="executive-banner-left">
+        <p class="banner-tag">MV EXPRESS / DAILY CONTROL</p>
+        <h2>Professional management system for your shop</h2>
+        <p>
+          This dashboard is designed for real daily work. It is connected with staff attendance,
+          salary calculation, customer complaints, and shop management modules.
+        </p>
+        <button type="button" class="banner-button">MASTER BUILD</button>
+      </div>
+
+      <div class="executive-banner-right">
+        <div class="banner-badge">MVEXPRESS PRO</div>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <p class="stat-label">Active Staff</p>
+        <h3 id="activeStaff">0</h3>
+        <span class="stat-foot">currently available</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Open Complaints</p>
+        <h3 id="openComplaints">0</h3>
+        <span class="stat-foot">awaiting action</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Low Stock Items</p>
+        <h3 id="lowStockItems">0</h3>
+        <span class="stat-foot">needs refill</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Today Income</p>
+        <h3 id="todayIncome">₹0</h3>
+        <span class="stat-foot">cash + UPI</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Today Expense</p>
+        <h3 id="todayExpense">₹0</h3>
+        <span class="stat-foot">shop spending</span>
+      </div>
+
+      <div class="stat-card emphasis-card">
+        <p class="stat-label">Net Position</p>
+        <h3 id="netPosition">₹0</h3>
+        <span class="stat-foot">income - expense</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Birthday Today</p>
+        <h3 id="birthdayTodayCount">0</h3>
+        <span class="stat-foot">customers to greet</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Birthday Month</p>
+        <h3 id="birthdayThisMonthCount">0</h3>
+        <span class="stat-foot">birthday offer list</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Loyal Customers</p>
+        <h3 id="loyalCustomerCount">0</h3>
+        <span class="stat-foot">5+ visits</span>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">VIP Repeat</p>
+        <h3 id="vipRepeatCount">0</h3>
+        <span class="stat-foot">10+ visits</span>
+      </div>
+    </section>
+
+    <section class="module-section">
+      <div class="section-header-row">
+        <div>
+          <p class="section-kicker">LOOK & FEEL CONTROL</p>
+          <h2>Theme changer</h2>
+        </div>
+        <p class="section-helper">Choose the style you want for your app dashboard.</p>
+      </div>
+
+      <div class="module-grid">
+        <article class="module-card">
+          <div class="module-icon">🎨</div>
+          <h3>Theme Mode</h3>
+          <p>
+            Switch the dashboard appearance anytime. Your selected theme will be saved automatically.
+          </p>
+
+          <label for="themeSelector">Choose Theme</label>
+          <select id="themeSelector">
+            <option value="midnight-lux">Midnight Lux</option>
+            <option value="royal-indigo">Royal Indigo</option>
+            <option value="emerald-executive">Emerald Executive</option>
+            <option value="graphite-gold">Graphite Gold</option>
+          </select>
+
+          <button type="button" class="action-btn" id="applyThemeBtn">Apply Theme</button>
+        </article>
+
+          <article class="module-card">
+  <div class="module-icon">💾</div>
+  <h3>Database Backup</h3>
+  <p>Create a safe backup copy of your full MVEXPRESS database.</p>
+  <button type="button" class="action-btn" id="createBackupBtn">
+    Create Backup
+  </button>
+  <p id="backupMessage" class="message"></p>
+  </article>
+
+        <article class="module-card">
+  <div class="module-icon">♻️</div>
+  <h3>Restore Backup</h3>
+  <p>Restore your database from an old backup file. Use carefully.</p>
+
+  <label for="restoreBackupSelect">Choose Backup</label>
+  <select id="restoreBackupSelect">
+    <option value="">Loading backups...</option>
+  </select>
+
+  <button type="button" class="danger-btn" id="restoreBackupBtn">
+    Restore Selected Backup
+  </button>
+
+  <p id="restoreBackupMessage" class="message"></p>
+</article>
+
+        <article class="module-card">
+          <div class="module-icon">01</div>
+          <h3>Staff Management</h3>
+          <p>Add staff profile, mobile number, WhatsApp number, GPay number, role, and pay settings.</p>
+          <a href="/staff.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">02</div>
+          <h3>Attendance</h3>
+          <p>Automatic IN and OUT time recording with per-staff working hour calculation.</p>
+          <a href="/attendance.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">03</div>
+          <h3>Payroll</h3>
+          <p>Monthly salary calculation based on hours worked and payment cycle on the 10th.</p>
+          <a href="/payroll.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">04</div>
+          <h3>Complaints</h3>
+          <p>Customer complaint submission, timestamp capture, admin review, and status updates.</p>
+          <a href="/complaints.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">05</div>
+          <h3>Inventory</h3>
+          <p>Track papers, ink, tape, pouches, packing items, and low-stock alerts clearly.</p>
+          <a href="/inventory.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">06</div>
+          <h3>Expenses</h3>
+          <p>Record daily shop expenses like rent, electricity, paper, ink, packaging, and other spending.</p>
+          <a href="/expenses.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">07</div>
+          <h3>Income</h3>
+          <p>Record courier, printing, lamination, and other service income to track real daily and monthly earnings.</p>
+          <a href="/income.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">08</div>
+          <h3>Profit & Loss</h3>
+          <p>Review monthly income, expenses, payroll outflow, and real business net result clearly.</p>
+          <a href="/profit-loss.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">09</div>
+          <h3>Activity Logs</h3>
+          <p>See attendance edits, expense changes, payroll actions, stock updates, and other important history.</p>
+          <a href="/activity-logs.html" class="action-btn module-link-btn">Open Module</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
